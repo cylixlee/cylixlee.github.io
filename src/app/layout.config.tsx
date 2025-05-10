@@ -16,5 +16,6 @@ export const baseOptions: BaseLayoutProps = {
         CYLIX
       </>
     ),
+    transparentMode: "always",
   },
 };
