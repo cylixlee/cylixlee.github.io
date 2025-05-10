@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { Image } from "fumadocs-core/framework";
 
 /**
  * Shared layout configurations
@@ -9,6 +10,11 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: <>CYLIX</>,
+    title: (
+      <>
+        <Image src={"/icon.png"} alt="" width={28} height={28} />
+        CYLIX
+      </>
+    ),
   },
 };
