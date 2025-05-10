@@ -28,6 +28,12 @@ export const baseOptions: BaseLayoutProps = {
       text: "Documentation",
       url: "/docs",
       active: "nested-url",
+
+      // This seems broken?
+      //
+      // When I set this to "menu", the "Documentation" link appears ONLY in the menu. However, when I set it to "nav",
+      // the "Documentation" link appears in both the menu and the nav, just like the "all" option.
+      on: "nav",
     },
   ],
 };
