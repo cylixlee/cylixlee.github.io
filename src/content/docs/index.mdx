@@ -1,40 +1,22 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: 代码即正义
+description: My personal docs site.
 template: splash # Remove or comment out this line to display the site sidebar on this page.
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: 一个开发者的思维碎片与数字足迹
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/icon.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: 阅读文档和博客
+      link: /welcome
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: 访问我的 GitHub
+      link: https://github.com/cylixlee
+      icon: github
       variant: minimal
+sidebar:
+  hidden: true
+prev: false
+next: false
+pagefind: false
 ---
-
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
-## Next steps
-
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>

@@ -1,0 +1,37 @@
+@media (min-width: 72rem) {
+    [data-has-sidebar][data-has-toc] .main-pane {
+        width: calc(100% - var(--sl-sidebar-width));
+
+        --sl-content-width: 65rem;
+        --sl-content-margin-inline: auto;
+    }
+
+    .right-sidebar {
+        border-inline-start: 0;
+    }
+
+    .right-sidebar-container {
+        /* width: var(--sl-sidebar-width); */
+        max-width: var(--sl-sidebar-width);
+        flex: 0 0 var(--sl-sidebar-width);
+    }
+}
+
+@media (min-width: 50rem) {
+    .header> :nth-child(2) {
+        justify-content: flex-end;
+    }
+}
+
+/* Remove the borders separating the main layout areas */
+.sidebar-pane {
+    border-inline-end: 0;
+}
+
+.header {
+    border-bottom: 0;
+}
+
+.content-panel {
+    border-top: 0;
+}

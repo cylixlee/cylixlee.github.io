@@ -1,0 +1,44 @@
+---
+title: 配置 WSL 自动继承 Windows 代理
+---
+
+import { Image } from 'astro:assets'
+import autoproxy from '../../../images/autoproxy.png'
+
+<Image src={autoproxy} alt="auto proxy example" />
+
+### 问题
+
+在使用 WSL 时，经常会遇到如下提示：
+
+> *wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。*
+
+此时 WSL 无法使用宿主机的代理设置，通常需要启用 TUN 模式才能让其访问。然而，TUN 模式同时也代理了所有程序的网络请求，使得很多直连的场景也使用代理访问。
+
+### 解决方案
+
+1. 打开 WSL Settings 应用，在网络设置下可以将网络模式设置为 Mirrored，这样 WSL **直接共享宿主机网络栈**，而不需要 Hyper-V 的虚拟交换机来做地址转换。
+2. 将“已启用自动代理”**设置为关**。
+3. 在 WSL 中修改 `~/.bashrc`，在尾部添加如下代码：
+
+```bash
+setup_proxy() {
+  local host="127.0.0.1"
+  local ports=(7897) # 数组，可以更改为多个可能的端口
+
+  for port in "${ports[@]}"; do
+    if curl -s -o /dev/null -m 1 "http://$host:$port"; then
+      export http_proxy="http://$host:$port"
+      export https_proxy="http://$host:$port"
+      export HTTP_PROXY="$http_proxy"
+      export HTTPS_PROXY="$https_proxy"
+      PS1="(proxy) $PS1"
+      return 0
+    fi
+  done
+}
+
+setup_proxy
+```
+
+这个脚本的本质是：**放弃让 WSL 自动同步 Windows 的代理设置**，改为在每次打开终端时，自己"敲门"试探 Windows 上的代理端口是否活着，活着就挂上，死了就清空，全程不依赖 WSL 的代理检测机制。
