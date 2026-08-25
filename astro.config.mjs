@@ -13,6 +13,7 @@ export default defineConfig({
 				{ label: "WSL2", items: [{ autogenerate: { directory: "wsl2" } }] },
 				{ label: "Windows Terminal", items: [{ autogenerate: { directory: "windows-terminal" } }] },
 				{ label: "MSYS2", items: [{ autogenerate: { directory: "msys2" } }] },
+				{ label: "Git", items: [{ autogenerate: { directory: "git" } }] },
 			],
 			customCss: ["./src/styles/custom.css"],
 			pagination: false,
