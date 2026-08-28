@@ -17,13 +17,12 @@ import autoproxy from '../../../images/autoproxy.png'
 
 ### 解决方案
 
-1. 打开 WSL Settings 应用，在网络设置下可以将网络模式设置为 Mirrored，这样 WSL **直接共享宿主机网络栈**，而不需要 Hyper-V 的虚拟交换机来做地址转换。
-2. 将“已启用自动代理”**设置为关**。
-3. 在 WSL 中修改 `~/.bashrc`，在尾部添加如下代码：
+1. 打开 WSL Settings 应用，将“已启用自动代理”**设置为关**。
+2. 在 WSL 中修改 `~/.bashrc`，在尾部添加如下代码：
 
 ```bash
 setup_proxy() {
-  local host="127.0.0.1"
+  local host="$(ip route show | grep -i default | awk '{ print $3 }')"
   local ports=(7897) # 数组，可以更改为多个可能的端口
 
   for port in "${ports[@]}"; do

@@ -14,7 +14,6 @@ export default defineConfig({
 				{ label: "Windows Terminal", items: [{ autogenerate: { directory: "windows-terminal" } }] },
 				{ label: "MSYS2", items: [{ autogenerate: { directory: "msys2" } }] },
 				{ label: "Git", items: [{ autogenerate: { directory: "git" } }] },
-				{ label: "Podman", items: [{ autogenerate: { directory: "podman" } }] },
 			],
 			customCss: ["./src/styles/custom.css"],
 			pagination: false,
