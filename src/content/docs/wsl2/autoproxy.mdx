@@ -21,23 +21,28 @@ import autoproxy from '../../../images/autoproxy.png'
 2. 在 WSL 中修改 `~/.bashrc`，在尾部添加如下代码：
 
 ```bash
-setup_proxy() {
+BASE_PS1="$PS1"
+
+sp() {
   local host="$(ip route show | grep -i default | awk '{ print $3 }')"
-  local ports=(7897) # 数组，可以更改为多个可能的端口
+  local ports=(7890) # 数组，可以更改为多个可能的端口
 
   for port in "${ports[@]}"; do
-    if curl -s -o /dev/null -m 1 "http://$host:$port"; then
+    if timeout 0.1 bash -c "echo >/dev/tcp/$host/$port" > /dev/null; then
       export http_proxy="http://$host:$port"
       export https_proxy="http://$host:$port"
-      export HTTP_PROXY="$http_proxy"
-      export HTTPS_PROXY="$https_proxy"
-      PS1="(proxy) $PS1"
+      export no_proxy="localhost,127.0.0.1"
+      PS1="(proxy) $BASE_PS1"
       return 0
     fi
   done
+  unset http_proxy
+  unset https_proxy
+  unset no_proxy
+  PS1="$BASE_PS1"
 }
 
-setup_proxy
+sp
 ```
 
 这个脚本的本质是：**放弃让 WSL 自动同步 Windows 的代理设置**，改为在每次打开终端时，自己"敲门"试探 Windows 上的代理端口是否活着，活着就挂上，死了就清空，全程不依赖 WSL 的代理检测机制。
