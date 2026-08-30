@@ -13,7 +13,6 @@ Host github
   HostName ssh.github.com
   Port 443
   User git
-  ProxyCommand "C:/Program Files/Git/mingw64/bin/connect.exe" -S 127.0.0.1:7897 %h %p
 
 Host gitcode.com
   HostName gitcode.com
@@ -52,7 +51,6 @@ Host github
   HostName ssh.github.com
   Port 443
   User git
-  ProxyCommand "C:/Program Files/Git/mingw64/bin/connect.exe" -S 127.0.0.1:7897 %h %p
 ```
 
 因为防火墙的设置，一般使用代理时无法访问 `22` 端口。此时可以访问 443 端口来进行 SSH。此时运行
