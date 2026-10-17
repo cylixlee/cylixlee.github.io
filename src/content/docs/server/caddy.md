@@ -40,7 +40,9 @@ Let's Encrypt 在 2024/2025 年逐步推出的 IP 地址证书支持。我们可
             profile shortlived
         }
     }
-    reverse_proxy 127.0.0.1:8080
+    reverse_proxy 127.0.0.1:8080 {
+        header_up X-Real-IP {remote_host}
+    }
 }
 ```
 
@@ -63,7 +65,7 @@ server {
         proxy_pass http://127.0.0.1:9000; 
         
         proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-IP $http_x_real_ip;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto https;
     }
